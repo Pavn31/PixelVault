@@ -1,0 +1,12 @@
+.git
+.env
+.venv
+__pycache__
+*.py[cod]
+*.egg-info
+.pytest_cache
+staticfiles
+media
+temporary
+postgres_data
+README.md
