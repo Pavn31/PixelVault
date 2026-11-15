@@ -9,3 +9,5 @@ temporary/
 staticfiles/
 *.sqlite3
 .mypy_cache/
+.gitignore
+.env.example
