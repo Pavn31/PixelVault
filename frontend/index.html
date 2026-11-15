@@ -6,12 +6,12 @@
   <meta name="description" content="PixelVault securely packages files inside a portable encrypted container.">
   <title>PixelVault — Private by design</title>
   <link rel="icon" type="image/jpeg" href="{% static 'Icon.jpeg' %}">
-  <link rel="stylesheet" href="{% static 'app.css' %}?v=glass-blue-20261115">
+  <link rel="stylesheet" href="{% static 'app.css' %}?v=dark-brutalist-20261115">
 </head>
 <body>
   <header class="site-header container">
     <a class="brand" href="/" aria-label="PixelVault home"><span class="brand-mark"><img src="{% static 'Icon.jpeg' %}" alt=""></span><span>PixelVault</span></a>
-    <nav aria-label="Primary navigation"><a href="/encoder/">Encode</a><a href="/decoder/">Decode</a></nav>
+    <nav aria-label="Primary navigation"><a href="/encoder/">Encode</a><a href="/decoder/">Decode</a><button class="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch theme"><span aria-hidden="true">◐</span></button></nav>
   </header>
   <main>
     <section class="hero container">
@@ -27,5 +27,6 @@
     </section>
   </main>
   <footer class="site-footer container"><span>PixelVault v0.1</span><span>Transfer files without transforming them.</span></footer>
+  <script src="{% static 'app.js' %}?v=dark-brutalist-20261115" defer></script>
 </body>
 </html>

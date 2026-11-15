@@ -1,4 +1,24 @@
 const qs = (selector) => document.querySelector(selector);
+const setupThemeToggle = () => {
+  const root = document.body;
+  const toggle = qs(".theme-toggle");
+  const storedTheme = localStorage.getItem("pixelvault-theme") || "dark";
+  const applyTheme = (theme) => {
+    root.dataset.theme = theme;
+    if (toggle) {
+      const light = theme === "light";
+      toggle.setAttribute("aria-label", light ? "Switch to dark theme" : "Switch to light theme");
+      toggle.title = light ? "Switch to dark theme" : "Switch to light theme";
+      toggle.firstElementChild.textContent = light ? "☾" : "◐";
+    }
+  };
+  applyTheme(storedTheme);
+  toggle?.addEventListener("click", () => {
+    const nextTheme = root.dataset.theme === "light" ? "dark" : "light";
+    localStorage.setItem("pixelvault-theme", nextTheme);
+    applyTheme(nextTheme);
+  });
+};
 const formatBytes = (value) => { if (value < 1024) return `${value} B`; if (value < 1024 ** 2) return `${(value / 1024).toFixed(1)} KB`; if (value < 1024 ** 3) return `${(value / 1024 ** 2).toFixed(1)} MB`; return `${(value / 1024 ** 3).toFixed(1)} GB`; };
 const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[character]));
 const csrfToken = () => document.cookie.split("; ").find((item) => item.startsWith("csrftoken="))?.split("=")[1] || "";
@@ -33,4 +53,4 @@ const setupDecoder = () => {
   button.addEventListener("click", async () => { button.disabled = true; qs("#recovered-panel").classList.add("hidden"); setProgress("decode-progress", 0); setStatus(status, "Validating container…", "working"); const form = new FormData(); form.append("container", fileInput.files[0]); form.append("passcode", passcode.value); const recoverySecret = qs("#recovery-secret").value; if (recoverySecret && recoverySecret.length < 8) { setStatus(status, "Recovery secret must be at least 8 characters.", "error"); button.disabled = false; return; } if (recoverySecret) form.append("recovery_secret", recoverySecret); try { await new Promise((resolve) => setTimeout(resolve, 250)); setProgress("decode-progress", 1); setStatus(status, "Authenticating passcode…", "working"); const response = await fetch("/api/decode/", { method: "POST", body: form, headers: { "X-CSRFToken": csrfToken() } }); if (!response.ok) throw new Error(await apiError(response)); setProgress("decode-progress", 2); setStatus(status, "Decrypting and checking recovered files…", "working"); recoveredBlob = await response.blob(); setProgress("decode-progress", 3); qs("#recovered-summary").textContent = "Your recovered files are bundled in a ZIP. Click Download All ZIP when ready."; qs("#recovered-list").innerHTML = `<div class="file-row"><span class="file-name"><span class="file-dot"></span>pixelvault-recovered.zip</span><span class="file-meta">${formatBytes(recoveredBlob.size)}</span></div>`; qs("#recovered-panel").classList.remove("hidden"); setStatus(status, "Recovery complete. Your ZIP is ready to download.", "success"); } catch (error) { setStatus(status, error.message, "error"); button.disabled = false; setProgress("decode-progress", 0); } });
 };
 
-document.addEventListener("DOMContentLoaded", async () => { try { await fetch("/api/csrf/", { credentials: "same-origin" }); } catch { /* Submit displays the actionable error. */ } if (document.body.dataset.page === "encoder") setupEncoder(); if (document.body.dataset.page === "decoder") setupDecoder(); });
+document.addEventListener("DOMContentLoaded", async () => { setupThemeToggle(); try { await fetch("/api/csrf/", { credentials: "same-origin" }); } catch { /* Submit displays the actionable error. */ } if (document.body.dataset.page === "encoder") setupEncoder(); if (document.body.dataset.page === "decoder") setupDecoder(); });
