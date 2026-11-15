@@ -34,6 +34,7 @@ PixelVault packages multiple permitted files—including documents, images, vide
 - Configurable media moderation provider
 - CSRF protection, throttling, audit metadata, and cleanup jobs
 - Dark matte brutalist interface with responsive layouts
+- Custom `assets/Icon.jpeg` branding used as the site mark and favicon
 
 ## Architecture
 
