@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>{% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PixelVault securely packages files inside a portable encrypted container.">
+  <title>PixelVault — Private by design</title>
+  <link rel="stylesheet" href="{% static 'app.css' %}?v=ivory-3d-20261115">
+</head>
+<body>
+  <header class="site-header container">
+    <a class="brand" href="/" aria-label="PixelVault home"><span class="brand-mark">PV</span><span>PixelVault</span></a>
+    <nav aria-label="Primary navigation"><a href="/encoder/">Encode</a><a href="/decoder/">Decode</a></nav>
+  </header>
+  <main>
+    <section class="hero container">
+      <p class="eyebrow">PRIVATE DATA, PORTABLE FORMAT</p>
+      <h1>Hide the payload.<br><em>Keep the key.</em></h1>
+      <p class="hero-copy">PixelVault combines authenticated encryption with an independently recoverable image-compatible container for sharing sensitive files with less exposure.</p>
+      <div class="hero-actions"><a class="button button-primary" href="/encoder/">Start encoding <span>→</span></a><a class="button button-secondary" href="/decoder/">Recover files</a></div>
+    </section>
+    <section class="feature-grid container" aria-label="PixelVault features">
+      <article class="feature-card"><span class="feature-number">01</span><h2>Package</h2><p>Bring an image and multiple files together in one structured payload.</p></article>
+      <article class="feature-card"><span class="feature-number">02</span><h2>Protect</h2><p>AES-256-GCM and Argon2id protect the payload and authenticate every byte.</p></article>
+      <article class="feature-card"><span class="feature-number">03</span><h2>Recover</h2><p>Use the encoded file and passcode to restore original names and contents.</p></article>
+    </section>
+  </main>
+  <footer class="site-footer container"><span>PixelVault v0.1</span><span>Transfer files without transforming them.</span></footer>
+</body>
+</html>

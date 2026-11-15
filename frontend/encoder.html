@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>{% load static %}
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Encode — PixelVault</title><link rel="stylesheet" href="{% static 'app.css' %}?v=ivory-3d-20261115">
+</head>
+<body data-page="encoder">
+  <header class="site-header container"><a class="brand" href="/"><span class="brand-mark">PV</span><span>PixelVault</span></a><nav><a href="/encoder/" aria-current="page">Encode</a><a href="/decoder/">Decode</a></nav></header>
+  <main class="workspace container">
+    <div class="page-heading"><p class="eyebrow">ENCODER</p><h1>Create a PixelVault file</h1><p>Choose a carrier image, add files, and receive a protected portable container.</p></div>
+    <div class="workflow-grid">
+      <section class="panel"><div class="step-label">01 <span>Carrier image</span></div>
+        <label class="dropzone" for="carrier-input" data-drop-target="carrier-input"><input id="carrier-input" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp,image/svg+xml"><span class="drop-icon">＋</span><strong>Drop an image here</strong><small>PNG, JPG, WEBP, GIF, BMP, or SVG</small></label>
+        <div id="carrier-preview" class="carrier-preview hidden"></div><div id="carrier-list" class="file-list" aria-live="polite"></div>
+      </section>
+      <section class="panel"><div class="step-label">02 <span>Payload files</span></div>
+        <label class="dropzone" for="payload-input" data-drop-target="payload-input"><input id="payload-input" type="file" multiple><span class="drop-icon">＋</span><strong>Drop files here</strong><small>Multiple files supported</small></label>
+        <div id="payload-list" class="file-list" aria-live="polite"></div>
+      </section>
+    </div>
+    <section class="panel secret-panel"><label for="recovery-secret">Optional recovery secret <span>(recommended for sensitive files)</span></label><input id="recovery-secret" class="secret-input" type="password" minlength="8" maxlength="128" autocomplete="new-password" placeholder="At least 8 characters"><p class="hint">This is never stored. You must provide it together with the six-digit passcode during recovery.</p></section>
+    <section class="panel action-panel"><div><h2>Ready to encode?</h2><p>Your passcode will be generated after validation and moderation.</p></div><button id="encode-button" class="button button-primary" type="button" disabled>Encode files <span>→</span></button><p id="encode-status" class="status" role="status"></p></section>
+    <section id="encode-result" class="result-card hidden" aria-live="polite"><div class="result-icon">✓</div><div><p class="eyebrow">ENCODING COMPLETE</p><h2>Your PixelVault file is ready</h2><p>Keep the passcode separate from the encoded file.</p><div class="passcode-display"><span>PASSCODE</span><strong id="generated-passcode">------</strong><button id="copy-passcode" class="copy-button" type="button">Copy</button></div></div></section>
+    <div class="progress-steps" id="encode-progress" aria-label="Encoding progress"><span class="active">Validate</span><span>Moderate</span><span>Encrypt</span><span>Package</span></div>
+  </main>
+  <script src="{% static 'app.js' %}?v=ivory-3d-20261115" defer></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>{% load static %}
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Decode — PixelVault</title><link rel="stylesheet" href="{% static 'app.css' %}?v=ivory-3d-20261115">
+</head>
+<body data-page="decoder">
+  <header class="site-header container"><a class="brand" href="/"><span class="brand-mark">PV</span><span>PixelVault</span></a><nav><a href="/encoder/">Encode</a><a href="/decoder/" aria-current="page">Decode</a></nav></header>
+  <main class="workspace container narrow">
+    <div class="page-heading"><p class="eyebrow">DECODER</p><h1>Recover your files</h1><p>Upload a PixelVault container and enter its six-digit passcode.</p></div>
+    <section class="panel"><label class="dropzone" for="container-input" data-drop-target="container-input"><input id="container-input" type="file" accept=".pvlt,application/octet-stream"><span class="drop-icon">＋</span><strong>Drop a .pvlt file here</strong><small>PixelVault containers are independently recoverable</small></label><div id="container-list" class="file-list" aria-live="polite"></div></section>
+    <section class="panel passcode-panel"><label for="passcode">Six-character passcode</label><input id="passcode" class="passcode" type="text" inputmode="text" maxlength="6" autocomplete="one-time-code" placeholder="A7#mQ2"><p class="hint">Use uppercase/lowercase letters, numbers, and symbols exactly as shown.</p><button id="decode-button" class="button button-primary" type="button" disabled>Decode files <span>→</span></button><p id="decode-status" class="status" role="status"></p></section>
+    <section class="panel secret-panel"><label for="recovery-secret">Recovery secret <span>(only if one was set during encoding)</span></label><input id="recovery-secret" class="secret-input" type="password" maxlength="128" autocomplete="current-password" placeholder="Leave blank if none was set"><p class="hint">The secret is never transmitted to PixelVault storage after this request.</p></section>
+    <section id="recovered-panel" class="result-card hidden" aria-live="polite"><div class="result-icon">✓</div><div><p class="eyebrow">RECOVERY COMPLETE</p><h2>Your files are ready</h2><p id="recovered-summary">The recovery ZIP has been downloaded.</p><div id="recovered-list" class="file-list"></div><button id="download-recovered" class="button button-primary" type="button">Download All ZIP <span>↓</span></button></div></section>
+    <div class="progress-steps" id="decode-progress" aria-label="Decoding progress"><span class="active">Validate</span><span>Authenticate</span><span>Decrypt</span><span>Recover</span></div>
+  </main>
+  <script src="{% static 'app.js' %}?v=ivory-3d-20261115" defer></script>
+</body>
+</html>

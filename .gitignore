@@ -1,0 +1,11 @@
+.env
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+media/
+temporary/
+staticfiles/
+*.sqlite3
+.mypy_cache/
