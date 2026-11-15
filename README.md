@@ -83,6 +83,7 @@ Set these values in `.env`:
 DJANGO_SECRET_KEY=long-random-secret
 DJANGO_DEBUG=true
 DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1
+CSRF_TRUSTED_ORIGINS=http://localhost:8000,http://127.0.0.1:8000
 POSTGRES_DB=pixelvault
 POSTGRES_USER=pixelvault
 POSTGRES_PASSWORD=strong-local-password
