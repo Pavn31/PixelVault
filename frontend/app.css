@@ -598,6 +598,44 @@ body {
   color: var(--signal-blue);
   box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .4), 3px 3px 0 rgba(118, 185, 237, .28);
 }
+/* A small modern layer: cleaner geometry and softer depth over the brutalist base. */
+.site-header {
+  background: rgba(9, 10, 12, .58);
+  backdrop-filter: blur(16px);
+}
+.brand-mark, .button, .dropzone, .drop-icon, .file-row, .passcode, .secret-input, .passcode-display, .result-icon {
+  border-radius: 5px;
+}
+.button {
+  letter-spacing: .02em;
+}
+.feature-card, .panel, .result-card {
+  border-radius: 7px;
+  background-image: repeating-linear-gradient(105deg, rgba(255, 255, 255, .024) 0, rgba(255, 255, 255, .024) 1px, transparent 1px, transparent 4px), linear-gradient(145deg, rgba(98, 104, 110, .56), rgba(27, 29, 32, .93) 44%, rgba(62, 66, 71, .82));
+}
+.feature-card:hover, .panel:hover {
+  transform: translateY(-4px);
+  border-color: rgba(118, 185, 237, .46);
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .28), inset -2px -3px 0 rgba(0, 0, 0, .42), 0 18px 38px rgba(0, 0, 0, .68), 0 0 0 1px rgba(118, 185, 237, .08);
+}
+.hero-copy, .page-heading p, .feature-card p, .panel p {
+  max-width: 62ch;
+}
+.hero-actions {
+  margin-top: 4px;
+}
+.site-header nav a {
+  transition: color .18s ease, border-color .18s ease, transform .18s ease;
+}
+.site-header nav a:hover, .site-header nav a[aria-current="page"] {
+  transform: translateY(-1px);
+}
+.dropzone {
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, .08), transparent 40%), repeating-linear-gradient(105deg, rgba(255, 255, 255, .02) 0, rgba(255, 255, 255, .02) 1px, transparent 1px, transparent 4px);
+}
+.file-row, .passcode-display {
+  background: linear-gradient(135deg, rgba(255, 255, 255, .07), rgba(0, 0, 0, .28));
+}
 .feature-card::before, .panel::before, .result-card::before {
   content: "";
   position: absolute;
