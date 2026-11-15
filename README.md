@@ -104,5 +104,5 @@ tests/         Unit tests
 
 ## License
 
-Add a license before public production distribution.
+PixelVault is released under the [MIT License](LICENSE).
 
