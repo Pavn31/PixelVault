@@ -7,7 +7,7 @@
   --line-strong: rgba(235, 238, 241, .5);
   --blue: #dfe3e7;
   --blue-strong: #ffffff;
-  --signal-blue: #76b9ed;
+  --signal-blue: #b92336;
   --shadow: rgba(0, 0, 0, .6);
 }
 * {
@@ -74,7 +74,7 @@ a {
   height: 100%;
   display: block;
   object-fit: cover;
-  filter: saturate(.65) grayscale(.18) brightness(.92) contrast(1.08);
+  filter: grayscale(1) saturate(0) brightness(.92) contrast(1.08);
 }
 .brand:hover .brand-mark {
   border-color: var(--blue);
@@ -505,7 +505,7 @@ a {
 .hidden {
   display: none;
 }
-/* Chrome texture, editorial type, and restrained blue signal accents. */
+/* Chrome texture, editorial type, and restrained cherry signal accents. */
 body {
   font-family: "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
   background-image: repeating-linear-gradient(102deg, rgba(255, 255, 255, .018) 0, rgba(255, 255, 255, .018) 1px, transparent 1px, transparent 5px), radial-gradient(circle at 50% -10%, rgba(230, 235, 240, .1), transparent 30rem), linear-gradient(135deg, #0d0f12, #07080a 58%, #121417);
