@@ -1,4 +1,5 @@
 import hashlib
+from concurrent.futures import ThreadPoolExecutor
 
 from django.conf import settings
 from django.utils import timezone
@@ -21,6 +22,18 @@ from apps.validation.service import read_limited, validate_carrier, validate_pay
 
 class DecodeThrottle(AnonRateThrottle):
     scope = "decode"
+
+
+def _moderate_files(files):
+    """Run independent moderation jobs concurrently, keeping input order."""
+    worker_count = min(4, len(files))
+    with ThreadPoolExecutor(max_workers=worker_count, thread_name_prefix="moderation") as executor:
+        return list(
+            executor.map(
+                lambda item: (item[0], moderate_file(item[1], item[0], item[2])),
+                files,
+            )
+        )
 
 
 def health(_request):
@@ -46,13 +59,14 @@ def encode(request):
     try:
         carrier = read_limited(carrier_upload)
         validate_carrier(carrier, carrier_upload.name, carrier_upload.content_type)
-        reports = [(carrier_upload.name, moderate_file(carrier, carrier_upload.name, carrier_upload.content_type))]
+        moderation_inputs = [(carrier_upload.name, carrier, carrier_upload.content_type)]
         inputs = []
         for upload in payload_uploads:
             content = read_limited(upload)
             validate_payload(upload.name, content)
-            reports.append((upload.name, moderate_file(content, upload.name, upload.content_type)))
+            moderation_inputs.append((upload.name, content, upload.content_type))
             inputs.append(InputFile(upload.name, content, upload.content_type))
+        reports = _moderate_files(moderation_inputs)
         passcode = generate_passcode()
         blob = serialize(create_container(carrier, inputs, passcode, recovery_secret))
     except ValidationError as error:
